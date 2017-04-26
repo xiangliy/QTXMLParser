@@ -7,11 +7,18 @@
 class Question4
 {
 public:
-    Question4();
 
     void parse(const QString& strInputFolderPath, const QString& strOutputFolderPath);
 
+    static Question4& getInstance()
+    {
+        static Question4 question4;
+        return question4;
+    }
+
 private:
+    Question4();
+
     QStringList _lstInputFile;
 
     void getfiles(const QString& strInputFolderPath);
@@ -24,6 +31,8 @@ private:
     void division(QXmlStreamReader& reader, double & dTotal);
 
     double getItemValue(QXmlStreamReader& reader, const QString& strKey);
+
+
 };
 
 #endif // QUESTION4_H

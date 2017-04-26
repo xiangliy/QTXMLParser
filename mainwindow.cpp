@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     // Third Question
-    Question3 q3;
+    Question3 q3 = Question3::getInstance();
     std::string strTotal = q3.getAllFibo(1000);
 
     ui->text_q3_answer->setText("Result: " + QString(QString::fromStdString(strTotal)));
@@ -52,7 +52,7 @@ void MainWindow::calculateArea(const QString &newR)
  */
 void MainWindow::handleParse()
 {
-    Question4 q4;
+    Question4 q4 = Question4::getInstance();
     q4.parse("D:\\qttest\\", "D:\\qttest1\\");
     //q4.parse(ui->edit_q4_inputfile->text(), ui->edit_q4_outputfile->text());
 }

@@ -7,7 +7,6 @@
 
 Question4::Question4()
 {
-
 }
 
 /*
@@ -57,7 +56,7 @@ void Question4::getfiles(const QString& strInputFolderPath)
     QDir fileDir(strInputFolderPath);
     fileDir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
 
-    if(!fileDir.exists())
+    if (!fileDir.exists())
     {
         qWarning("Cannot find input directory");
     }
@@ -87,12 +86,12 @@ void Question4::parsefile(const QString& strInputFile, const QString& strOutputF
         qInfo() << "Output file : " + strOutputFile;
 
         QFile inputfile(strInputFile);
-        if(!inputfile.open(QFile::ReadOnly | QFile::Text)){
+        if (!inputfile.open(QFile::ReadOnly | QFile::Text)){
             qInfo() << "Cannot read file" << inputfile.errorString();
         }
 
         QFile outputfile(strOutputFile);
-        if(!outputfile.open(QFile::WriteOnly | QFile::Text)){
+        if (!outputfile.open(QFile::WriteOnly | QFile::Text)){
             qInfo() << "Cannot write file" << outputfile.errorString();
         }
 
@@ -103,28 +102,28 @@ void Question4::parsefile(const QString& strInputFile, const QString& strOutputF
         writer.writeStartDocument();
         writer.writeStartElement("expressions");
 
-        while(!reader.atEnd() && !reader.hasError())
+        while (!reader.atEnd() && !reader.hasError())
         {
-            if(reader.readNextStartElement())
+            if (reader.readNextStartElement())
             {
                 if (reader.attributes().hasAttribute("id"))
                 {
                     QString strID = reader.attributes().value("id").toString();
                     double dTotal = 0.0;
 
-                    if(reader.name() == "addition")
+                    if (reader.name() == "addition")
                     {
                         addition(reader, dTotal);
                     }
-                    else if(reader.name() == "subtraction")
+                    else if (reader.name() == "subtraction")
                     {
                         subtraction(reader, dTotal);
                     }
-                    else if(reader.name() == "multiplication")
+                    else if (reader.name() == "multiplication")
                     {
                         multiplication(reader, dTotal);
                     }
-                    else if(reader.name() == "division")
+                    else if (reader.name() == "division")
                     {
                         division(reader, dTotal);
                     }
@@ -156,6 +155,12 @@ void Question4::parsefile(const QString& strInputFile, const QString& strOutputF
 
 }
 
+/*
+ * * hangle addition in xml
+ *
+ *
+ * double & dTotal output the calculation result
+ */
 void Question4::addition(QXmlStreamReader& reader, double & dTotal)
 {
     try
@@ -180,6 +185,12 @@ void Question4::addition(QXmlStreamReader& reader, double & dTotal)
 
 }
 
+/*
+ * * hangle subtraction in xml
+ *
+ *
+ * double & dTotal output the calculation result
+ */
 void Question4::subtraction(QXmlStreamReader& reader, double & dTotal)
 {
     try
@@ -208,6 +219,12 @@ void Question4::subtraction(QXmlStreamReader& reader, double & dTotal)
     }
 }
 
+/*
+ * * hangle multiplication in xml
+ *
+ *
+ * double & dTotal output the calculation result
+ */
 void Question4::multiplication(QXmlStreamReader& reader, double & dTotal)
 {
     try
@@ -235,6 +252,12 @@ void Question4::multiplication(QXmlStreamReader& reader, double & dTotal)
 
 }
 
+/*
+ * * hangle division in xml
+ *
+ *
+ * double & dTotal output the calculation result
+ */
 void Question4::division(QXmlStreamReader& reader, double & dTotal)
 {
     try
@@ -266,7 +289,13 @@ void Question4::division(QXmlStreamReader& reader, double & dTotal)
     }
 }
 
-
+/*
+ * * Calculate the value of complex pattern
+ *
+ *
+ * const QString& strKey
+ * key can be values "item" for addition, "dividend" for division etc..
+ */
 double Question4::getItemValue(QXmlStreamReader& reader, const QString& strKey)
 {
     double dValue;
@@ -323,3 +352,5 @@ double Question4::getItemValue(QXmlStreamReader& reader, const QString& strKey)
 
     return dValue;
 }
+
+

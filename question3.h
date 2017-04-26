@@ -5,10 +5,17 @@
 class Question3
 {
 public:
-    Question3();
+
+    static Question3& getInstance()
+    {
+        static Question3 question3;
+        return question3;
+    }
+
 
     std::string getAllFibo(const int iUpperLimit);
 private:
+    Question3();
     int calFibo(const int i);
 };
 
